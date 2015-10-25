@@ -13,14 +13,14 @@ public class GetUsers {
 	
 	public static void execute(){
 		setParameters();
-		AutoGUI.wait(1000);
+		AutoGUI.wait(Execute.globalDelay);
 		List<String> foundUsers;
 		engine.findElementByLT("View registered users");
 		engine.click();
 		foundUsers = getUsersOnPage();
 		String[] result = {GetUsers.class.getSimpleName(), String.valueOf(verifyUsers(foundUsers))};
 		Execute.writer.writeNext(result);
-		AutoGUI.wait(1000);
+		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("Home Page");
 		engine.click();
 	}
@@ -51,7 +51,7 @@ public class GetUsers {
 	}
 	
 	public static List<String> getUsersOnPage(){
-		AutoGUI.wait(1000);
+		AutoGUI.wait(Execute.globalDelay);
 		System.out.println("Getting a list of users from the web page");
 		List<List<String>> rawTable = engine.getTableById("users");
 		List<String> users = new ArrayList<String>();

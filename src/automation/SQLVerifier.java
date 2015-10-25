@@ -76,7 +76,7 @@ public class SQLVerifier {
 			PreparedStatement query = conn.prepareStatement(rawQuery);
 			query.setString(1, value);
 			System.out.println("Executing the following statement on the database: " + query.toString().substring(query.toString().indexOf("SELECT")));
-			AutoGUI.wait(1000);
+			AutoGUI.wait(Execute.globalDelay);
 			result = query.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();

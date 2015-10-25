@@ -16,7 +16,7 @@ public class DeleteUser {
 	public static void execute(){
 		setParameters();
 		System.out.println("The following users will be deleted: " + usersToDelete);
-		AutoGUI.wait(1000);
+		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("View registered users");
 		engine.click();
 		for (String user : usersToDelete){
@@ -25,7 +25,7 @@ public class DeleteUser {
 		}
 		String[] result = {DeleteUser.class.getSimpleName(), String.valueOf(verifyDeletedUsers())};
 		Execute.writer.writeNext(result);
-		AutoGUI.wait(1000);
+		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("Home Page");
 		engine.click();
 	}

@@ -12,6 +12,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class Execute {
+	
+	public static final int globalDelay = 500;
 
 	public static List<String[]> data = new ArrayList<String[]>();
 	public static List<String> keywords = new ArrayList<String>();
