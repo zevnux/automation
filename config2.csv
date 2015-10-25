@@ -1,0 +1,7 @@
+WebBrowser,localhost:3000
+Register,testUser,testPasswd,Registration was successfully created.
+GetUsers,testUser
+SQLVerifier,registrations,Username,testUser,1
+DeleteUser,testUser
+SQLVerifier,registrations,Username,testUser,0
+WebBrowser,shutdown

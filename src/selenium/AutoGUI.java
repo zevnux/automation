@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +52,20 @@ public class AutoGUI {
 		return table;
 	}
 	
+	public void deleteUserInTable (String tableId, String username){
+		element = driver.findElement(By.id((tableId)));
+		List<WebElement> records = element.findElements(By.xpath("id('" + tableId + "')/tbody/tr"));
+		for (WebElement e : records){
+			List<WebElement> cells = e.findElements(By.xpath("td"));
+			if (cells.get(0).getText().equals(username)){
+				cells.get(4).findElement(By.linkText("Delete")).click();
+				wait(1000);
+				Alert a = driver.switchTo().alert();
+				a.accept();
+			}
+		}
+	}
+	
 	public void click(){
 		element.click();
 	}
@@ -62,6 +77,14 @@ public class AutoGUI {
 	}
 	public void pressEnter(){
 		element.sendKeys(Keys.RETURN);
+	}
+	
+	public String getText(){
+		return element.getText();
+	}
+	
+	public void closeWebBrowser(){
+		driver.quit();
 	}
 	
 	public static void wait (int ms){

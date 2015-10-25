@@ -42,5 +42,6 @@
 	<classpathentry kind="lib" path="C:/Users/Daniel/workspace/automation/ext/selenium-2.47.1/libs/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Daniel/workspace/automation/ext/selenium-2.47.1/libs/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="ext/opencsv-3.5.jar"/>
+	<classpathentry kind="lib" path="ext/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

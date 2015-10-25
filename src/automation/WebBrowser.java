@@ -2,14 +2,20 @@ package automation;
 
 import selenium.AutoGUI;
 
-public class StartWebBrowser {
+public class WebBrowser {
 	
 	private static String url;
 	private static AutoGUI engine = new AutoGUI();
 	
 	public static void execute(){
 		setParameters();
-		engine.goToURL(url);
+		if (url.equalsIgnoreCase("Shutdown")){
+			System.out.println("Shutting down the web browser");
+			engine.closeWebBrowser();
+		} else {
+			System.out.println("Going to open the following page: " + url);
+			engine.goToURL(url);
+		}
 	}
 	
 	public static void setParameters(){

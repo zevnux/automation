@@ -1,0 +1,10 @@
+Register,true
+GetUsers,true
+SQLVerifier,true
+Register,true
+GetUsers,true
+SQLVerifier,false
+DeleteUser,true
+SQLVerifier,false
+DeleteUser,true
+SQLVerifier,true
