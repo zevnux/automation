@@ -22,7 +22,7 @@ public class Execute {
 		
 		CSVReader reader;
 		
-		File file = new File("ext/chromedriver.exe");
+		File file = new File("ext/chromedriver");
 		System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 		
 		try {
