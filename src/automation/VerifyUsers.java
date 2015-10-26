@@ -6,10 +6,11 @@ import java.util.List;
 
 import selenium.AutoGUI;
 
-public class GetUsers {
+public class VerifyUsers {
 	
 	private static AutoGUI engine = new AutoGUI();
 	private static List<String> expectedUsers;
+	private static boolean mode;
 	
 	public static void execute(){
 		setParameters();
@@ -18,7 +19,7 @@ public class GetUsers {
 		engine.findElementByLT("View registered users");
 		engine.click();
 		foundUsers = getUsersOnPage();
-		String[] result = {GetUsers.class.getSimpleName(), String.valueOf(verifyUsers(foundUsers))};
+		String[] result = {VerifyUsers.class.getSimpleName(), String.valueOf(verifyUsers(foundUsers))};
 		Execute.writer.writeNext(result);
 		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("Home Page");
@@ -28,25 +29,42 @@ public class GetUsers {
 	public static void setParameters (){
 		String rawUsers = Execute.parameters.remove(0);
 		expectedUsers = Arrays.asList(rawUsers.split(";"));
+		mode = Boolean.valueOf(Execute.parameters.remove(0));
 	}
 	
 	private static boolean verifyUsers(List<String> actualUsers){
-		System.out.println("Verifying the following users appear on the page: " + expectedUsers);
-		if (!expectedUsers.isEmpty()){
+		if (mode){
+			System.out.println("Verifying the following users appear on the page: " + expectedUsers);
+			if (!expectedUsers.isEmpty()){
+				for (String user : expectedUsers){
+					if (actualUsers.contains(user)){
+						System.out.println("Found user: " + user);
+						continue;
+					} else {
+						System.out.println("Failed to find user: " + user + "; Verification failed.");
+						return false;
+					}
+				}
+				System.out.println("Successfully found all expected users");
+				return true;
+			} else {
+				System.out.println("No users specifed to verify, skipping verification");
+				return true;
+			}
+		} else {
+			System.out.println("Verifying the following users do not appear on the page: " + expectedUsers);
+			List<String> users = VerifyUsers.getUsersOnPage();
 			for (String user : expectedUsers){
-				if (actualUsers.contains(user)){
-					System.out.println("Found user: " + user);
+				if (!users.contains(user)){
+					System.out.println("Verified this user does not appear: " + user);
 					continue;
 				} else {
-					System.out.println("Failed to find user: " + user + "; Verification failed.");
+					System.out.println("Found the user: " + user + "; Verification failed.");
 					return false;
 				}
 			}
-			System.out.println("Successfully found all expected users");
-			return true;
-		} else {
-			System.out.println("No users specifed to verify, skipping verification");
-			return true;
+			System.out.println("Successfully verified all users deleted");
+			return true;		
 		}
 	}
 	

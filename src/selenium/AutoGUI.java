@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import automation.Execute;
+
 
 public class AutoGUI {
 
@@ -59,7 +61,7 @@ public class AutoGUI {
 			List<WebElement> cells = e.findElements(By.xpath("td"));
 			if (cells.get(0).getText().equals(username)){
 				cells.get(4).findElement(By.linkText("Delete")).click();
-				wait(1000);
+				wait(Execute.globalDelay);
 				Alert a = driver.switchTo().alert();
 				a.accept();
 			}

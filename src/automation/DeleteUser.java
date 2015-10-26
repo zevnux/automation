@@ -15,35 +15,20 @@ public class DeleteUser {
 	
 	public static void execute(){
 		setParameters();
+		boolean deleted = false;
 		System.out.println("The following users will be deleted: " + usersToDelete);
 		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("View registered users");
 		engine.click();
 		for (String user : usersToDelete){
 			System.out.println("Attempting to delete user: " + user);
-			deleteUser(user);
+			deleted = deleteUser(user);
 		}
-		String[] result = {DeleteUser.class.getSimpleName(), String.valueOf(verifyDeletedUsers())};
+		String[] result = {DeleteUser.class.getSimpleName(), String.valueOf(deleted)};
 		Execute.writer.writeNext(result);
 		AutoGUI.wait(Execute.globalDelay);
 		engine.findElementByLT("Home Page");
 		engine.click();
-	}
-
-	private static boolean verifyDeletedUsers() {
-		System.out.println("Verifying the following users do not appear on the page: " + usersToDelete);
-		List<String> users = GetUsers.getUsersOnPage();
-		for (String user : usersToDelete){
-			if (!users.contains(user)){
-				System.out.println("Verified this user does not appear: " + user);
-				continue;
-			} else {
-				System.out.println("Found the user: " + user + "; Verification failed.");
-				return false;
-			}
-		}
-		System.out.println("Successfully verified all users deleted");
-		return true;		
 	}
 
 	public static void setParameters(){
@@ -51,13 +36,15 @@ public class DeleteUser {
 		usersToDelete = Arrays.asList(rawDelete);
 	}
 	
-	private static void deleteUser(String user) {
-		List<String> users = GetUsers.getUsersOnPage();
+	private static boolean deleteUser(String user) {
+		List<String> users = VerifyUsers.getUsersOnPage();
 		if (users.contains(user)){
 			engine.deleteUserInTable("users", user);
 			System.out.println("Successfully deleted user: " + user);
+			return true;
 		} else {
 			System.out.println("Failed to delete user: " + user +"; Unable to find the user");
+			return false;
 		}
 	}
 
