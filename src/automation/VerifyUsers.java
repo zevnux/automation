@@ -15,9 +15,9 @@ public class VerifyUsers {
 	public static void execute(){
 		setParameters();
 		AutoGUI.wait(Execute.globalDelay);
-		List<String> foundUsers;
 		engine.findElementByLT("View registered users");
 		engine.click();
+		List<String> foundUsers;
 		foundUsers = getUsersOnPage();
 		String[] result = {VerifyUsers.class.getSimpleName(), String.valueOf(verifyUsers(foundUsers))};
 		Execute.writer.writeNext(result);
@@ -53,9 +53,8 @@ public class VerifyUsers {
 			}
 		} else {
 			System.out.println("Verifying the following users do not appear on the page: " + expectedUsers);
-			List<String> users = VerifyUsers.getUsersOnPage();
 			for (String user : expectedUsers){
-				if (!users.contains(user)){
+				if (!actualUsers.contains(user)){
 					System.out.println("Verified this user does not appear: " + user);
 					continue;
 				} else {

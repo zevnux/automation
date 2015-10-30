@@ -2,12 +2,6 @@ WebBrowser,localhost:3000
 Register,testUser,testPasswd,Registration was successfully created.
 VerifyUsers,testUser,true
 SQLVerifier,registrations,Username,testUser,1
-Register,testUser,testPasswd,1 error prohibited this registration from being saved:Username has already been taken
-VerifyUsers,testUser,true
-SQLVerifier,registrations,Username,testUser,2
-DeleteUser,testUser
-VerifyUsers,testUser,false
-SQLVerifier,registrations,Username,testUser,1
 DeleteUser,testUser
 VerifyUsers,testUser,false
 SQLVerifier,registrations,Username,testUser,0
